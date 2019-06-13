@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Errors;
 
 namespace DialogEngine
 {
@@ -6,9 +7,23 @@ namespace DialogEngine
     public class DialogGeneratorTest
     {
         private const string FILEPATH = "C:\\Users\\brogr\\source\\repos\\DialogEngine\\TokenizerTests\\TestData\\test1.txt.txt";
+        private const string BAD_FILEPATH = "C:\\Users\\brogr\\source\\repos\\DialogEngine\\TokenizerTests\\TestData\\testBAD.txt";
 
         [TestMethod]
-        public void TestTokenizer()
+        public void TestGenerator_BadFilePath()
+        {
+            try
+            {
+                DialogGenerator underTest = new DialogGenerator(BAD_FILEPATH);
+            }
+            catch (ScriptNotFoundException e)
+            {
+                Assert.AreEqual("DialogException: The following script could not be found: C:\\Users\\brogr\\source\\repos\\DialogEngine\\TokenizerTests\\TestData\\testBAD.txt", e.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TestGenerator()
         {
             DialogGenerator underTest = new DialogGenerator(FILEPATH);
             DialogMap result = underTest.GetDialog();
