@@ -13,12 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestData\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DialogEngine\DialogEngine.csproj" />
-    <ProjectReference Include="..\Errors2\Errors.csproj" />
+    <ProjectReference Include="..\Errors\Errors.csproj" />
   </ItemGroup>
 
 </Project>

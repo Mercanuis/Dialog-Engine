@@ -9,31 +9,13 @@ using Errors;
 namespace DialogEngine
 {
     /// <summary>
-    /// A Line is an underlying object that is used to assemble the dialog for a scene
-    /// A Line is a simple object containing the actor and the line of script to say
-    /// </summary>
-    public struct Line
-    {
-        public Line(string act, string dia)
-        {
-            Actor = act;
-            Dialog = dia;
-        }
-
-        public string Actor { get; }
-        public string Dialog { get; }
-    }
-
-    /// <summary>
     /// Class <code>DialogGenerator</code> is used to fetch, tokenize, and generate a map of dialog 
     /// to be used by a <code>DialogPrinter</code>. 
     /// </summary>
     public class DialogGenerator
     {
-        private const char SEPARATOR = ':';
-
-        private readonly DialogMap dialogMap;
         private readonly string scenePath;
+        private readonly Queue<string> lines;
 
         /// <summary>
         /// Create a new instance of a DialogGenerator
@@ -41,8 +23,9 @@ namespace DialogEngine
         /// <param name="scenePath">File path, in string format of the scene to generate</param>
         public DialogGenerator(string scenePath)
         {
-            dialogMap = new DialogMap();
             this.scenePath = scenePath;
+
+            lines = new Queue<string>() { };
             GenerateDialogMap();
         }
 
@@ -57,19 +40,19 @@ namespace DialogEngine
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    string[] tokens = line.Split(SEPARATOR);
-                    dialogMap.AddToMap(tokens[0].Trim(), tokens[1].Trim());
+                    lines.Enqueue(line);
                 }
             }
         }
 
+
         /// <summary>
-        /// Fetch the DialogMap generated
+        /// Returns the resulted generated dialog
         /// </summary>
-        /// <returns>The <code>DialogMap</code> object</returns>
-        public DialogMap GetDialog()
+        /// <returns>Generated dialog in a queue</returns>
+        public Queue<string> getLines()
         {
-            return dialogMap;
+            return lines;
         }
 
         public static void Main()
