@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace DialogEngine
 {
@@ -11,16 +11,20 @@ namespace DialogEngine
     /// </summary>
     public class DialogPrinter
     {
-        private const int END_OF_DIALOG = -1;
+        //private const int END_OF_DIALOG = -1;
         private const string END = "____END____";
 
-        private readonly DialogMap dialogMap;
-        private int counter;
+        //private readonly DialogMap dialogMap;
+        //private int counter;
 
-        public DialogPrinter(DialogMap map)
+        private readonly Queue<string> dialogLines;
+
+        public DialogPrinter(Queue<string> lines)
         {
-            dialogMap = map;
-            counter = 0;
+            //dialogMap = map;
+            //counter = 0;
+
+            dialogLines = lines;
         }
 
         /// <summary>
@@ -29,17 +33,9 @@ namespace DialogEngine
         /// <returns>The next line of dialog in a formatted string, or special case END</returns>
         public string GetNextDialogLine()
         {
-            if (counter != END_OF_DIALOG)
+            if(dialogLines.TryDequeue(out string line))
             {
-                Line dialogLine = dialogMap.GetByKey(counter);
-                String ret = String.Format("{0}: {1}", dialogLine.Actor, dialogLine.Dialog);
-
-                counter++;
-                if (counter >= dialogMap.GetCount())
-                {
-                    counter = END_OF_DIALOG;
-                }
-                return ret;
+                return line;
             }
 
             return END;
