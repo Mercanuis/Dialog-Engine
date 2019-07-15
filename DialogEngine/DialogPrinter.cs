@@ -11,12 +11,19 @@ namespace DialogEngine
     /// </summary>
     public class DialogPrinter
     {
+        //private const int END_OF_DIALOG = -1;
         private const string END = "____END____";
+
+        //private readonly DialogMap dialogMap;
+        //private int counter;
 
         private readonly Queue<string> dialogLines;
 
         public DialogPrinter(Queue<string> lines)
         {
+            //dialogMap = map;
+            //counter = 0;
+
             dialogLines = lines;
         }
 
