@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Errors\Errors.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\test1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

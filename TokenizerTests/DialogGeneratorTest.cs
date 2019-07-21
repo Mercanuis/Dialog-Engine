@@ -10,8 +10,8 @@ namespace DialogEngine
     public class DialogGeneratorTest
     {
         // TODO: This is ugly, learn about relative paths, the issue seems to stem from something in netcore2.1, not sure what
-        private string FILEPATH = "C:\\Users\\brogr\\source\\repos\\DialogEngine\\TokenizerTests\\TestData\\test1.txt";
-        private const string BAD_FILEPATH = "C:\\Users\\brogr\\source\\repos\\DialogEngine\\TokenizerTests\\TestData\\testBAD.txt";
+        private string FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "test1.txt");
+        private string BAD_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "BAD.txt");
 
         [TestMethod]
         public void TestGenerator_BadFilePath()
@@ -22,7 +22,7 @@ namespace DialogEngine
             }
             catch (ScriptNotFoundException e)
             {
-                Assert.AreEqual("DialogException: The following script could not be found: C:\\Users\\brogr\\source\\repos\\DialogEngine\\TokenizerTests\\TestData\\testBAD.txt", e.Message);
+                Assert.IsTrue(e.Message.Contains("The following script could not be found"));
             }
         }
 
