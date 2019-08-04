@@ -9,16 +9,16 @@ namespace DialogEngine
     [TestClass]
     public class DialogGeneratorTest
     {
-        // TODO: This is ugly, learn about relative paths, the issue seems to stem from something in netcore2.1, not sure what
-        private string FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "test1.txt");
-        private string BAD_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "BAD.txt");
+        private readonly string FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "test1.txt");
+        private readonly string BAD_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "BAD.txt");
 
         [TestMethod]
         public void TestGenerator_BadFilePath()
         {
             try
             {
-                DialogGenerator underTest = new DialogGenerator(BAD_FILEPATH);
+                DialogManager mgmr = new DialogManager();
+                DialogPrinter underTest = mgmr.GetForScript(BAD_FILEPATH);
             }
             catch (ScriptNotFoundException e)
             {
@@ -29,24 +29,22 @@ namespace DialogEngine
         [TestMethod]
         public void TestGenerator()
         {
-            DialogGenerator underTest = new DialogGenerator(FILEPATH);
-            Queue<string> result = underTest.getLines();
-            Assert.AreEqual(2, result.Count);
-
+            DialogManager mgmr = new DialogManager();
+            DialogPrinter underTest = mgmr.GetForScript(FILEPATH);
+           
             string expectedActor = "Arin : What do you say, suck my dick?";
-            Assert.AreEqual(expectedActor, result.Dequeue());
+            Assert.AreEqual(expectedActor, underTest.GetNextDialogLine());
         }
 
         [TestMethod]
         public void TestDialogPrinter()
         {
-            DialogGenerator generator = new DialogGenerator(FILEPATH);
-            Queue<string> lines = generator.getLines();
-            DialogPrinter printer = new DialogPrinter(lines);
+            DialogManager mgmr = new DialogManager();
+            DialogPrinter underTest = mgmr.GetForScript(FILEPATH);
 
-            Assert.AreEqual("Arin : What do you say, suck my dick?", printer.GetNextDialogLine());
-            Assert.AreEqual("Danny : Arin!? Really!? I thought you'd never ask!", printer.GetNextDialogLine());
-            Assert.AreEqual("____END____", printer.GetNextDialogLine());
+            Assert.AreEqual("Arin : What do you say, suck my dick?", underTest.GetNextDialogLine());
+            Assert.AreEqual("Danny : Arin!? Really!? I thought you'd never ask!", underTest.GetNextDialogLine());
+            Assert.AreEqual("____END____", underTest.GetNextDialogLine());
         }
     }
 }

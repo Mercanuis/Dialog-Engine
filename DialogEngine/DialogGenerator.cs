@@ -12,7 +12,7 @@ namespace DialogEngine
     /// Class <code>DialogGenerator</code> is used to fetch, tokenize, and generate a map of dialog 
     /// to be used by a <code>DialogPrinter</code>. 
     /// </summary>
-    public class DialogGenerator
+    class DialogGenerator
     {
         private readonly string scenePath;
         private readonly Queue<string> lines;
@@ -50,14 +50,9 @@ namespace DialogEngine
         /// Returns the resulted generated dialog
         /// </summary>
         /// <returns>Generated dialog in a queue</returns>
-        public Queue<string> getLines()
+        public Queue<string> GetLines()
         {
             return lines;
-        }
-
-        public static void Main()
-        {
-            //do nothing
         }
     }
 }
