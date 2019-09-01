@@ -45,7 +45,6 @@ namespace DialogEngine
             }
         }
 
-
         /// <summary>
         /// Returns the resulted generated dialog
         /// </summary>

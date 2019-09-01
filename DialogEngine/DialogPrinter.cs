@@ -2,14 +2,16 @@
 
 namespace DialogEngine
 {
-    /// <summary> Class DialogPrinter is repsonsible for the printing of dialog for a scene
+    /// <summary> Class DialogPrinter is repsonsible for the printing of dialog for a scene.  This allows a 'decoupling' of creating the script, and how it's handled once generated. 
     /// <para>
-    /// It takes a dialog map created by the <code>DialogGenerator</code> and tracks
-    /// the current point in time at the script the game or user is at. This allows a 'decoupling'
-    /// of creating the script, and how it's handled once generated. 
+    /// DialogPrinter is a 'default' option that is meant to facilitate a normal dialog that is used once, and is never brought up again. Some examples could be
+    /// <list type="bullet">
+    /// <item><description>A dialog in a story scene</description></item>
+    /// <item><description>A one-time system dialog</description></item>
+    /// </list>
     /// </para>
     /// </summary>
-    public class DialogPrinter
+    public class DialogPrinter : IDialogPrinter
     {
         private const string END = "____END____";
 
@@ -17,19 +19,12 @@ namespace DialogEngine
 
         public DialogPrinter(Queue<string> lines)
         {
-            //dialogMap = map;
-            //counter = 0;
-
             dialogLines = lines;
         }
 
-        /// <summary>
-        /// Fetch the next line of dialog the printer has
-        /// </summary>
-        /// <returns>The next line of dialog in a formatted string, or special case END</returns>
-        public string GetNextDialogLine()
+        public string GetDialogLine()
         {
-            if(dialogLines.TryDequeue(out string line))
+            if (dialogLines.TryDequeue(out string line))
             {
                 return line;
             }
