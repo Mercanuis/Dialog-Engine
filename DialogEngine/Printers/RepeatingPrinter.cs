@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DialogEngine
+namespace DialogEngine.Printers
 {
     /// <summary> Class RepeatingPrinter is repsonsible for the printing of dialog for a scene
     /// <para>

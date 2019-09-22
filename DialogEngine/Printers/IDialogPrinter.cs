@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DialogEngine
+namespace DialogEngine.Printers
 {
     /// <summary>
     /// Defines a set of functions to be used for access to any Printers.

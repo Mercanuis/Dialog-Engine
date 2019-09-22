@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DialogEngine
+namespace DialogEngine.Printers
 {
     /// <summary> Class DialogPrinter is repsonsible for the printing of dialog for a scene.  This allows a 'decoupling' of creating the script, and how it's handled once generated. 
     /// <para>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Errors;
+using DialogEngine.Utilities;
 
 /// <summary>
 /// Namespace related to anything involving the generation, management, and production of 
@@ -16,6 +17,7 @@ namespace DialogEngine
     {
         private readonly string scenePath;
         private readonly Queue<string> lines;
+        private string printerType;
 
         /// <summary>
         /// Create a new instance of a DialogGenerator
@@ -35,9 +37,15 @@ namespace DialogEngine
             {
                 throw new ScriptNotFoundException(scenePath);
             }
+
             using (StreamReader sr = File.OpenText(scenePath))
             {
+                //Read the first line as its the type dileniator, then enqueue the rest of the lines
+                //TODO: Is this the best way to determine file type and to generalize the manager/printer interactions?
                 string line;
+                line = sr.ReadLine();
+                printerType = DialogConstants.GetPrinterType(line);
+
                 while ((line = sr.ReadLine()) != null)
                 {
                     lines.Enqueue(line);
@@ -52,6 +60,11 @@ namespace DialogEngine
         public Queue<string> GetLines()
         {
             return lines;
+        }
+
+        public string GetPrinterType()
+        {
+            return printerType;
         }
     }
 }

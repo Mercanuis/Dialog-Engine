@@ -3,14 +3,16 @@ using Errors;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using DialogEngine.Printers;
 
 namespace DialogEngine
 {
     [TestClass]
     public class DialogGeneratorTest
     {
-        private readonly string FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "test1.txt");
+        private readonly string FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "GeneralPrintFile.txt");
         private readonly string BAD_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "BAD.txt");
+        private readonly string REPEATING_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "RepeatingPrintFile.txt");
 
         [TestMethod]
         public void TestGenerator_BadFilePath()
@@ -50,17 +52,15 @@ namespace DialogEngine
         [TestMethod]
         public void TestRepeatingPrinter()
         {
-            Queue<string> queue = new Queue<string>();
-            queue.Enqueue("Welcome to Corneria");
-            queue.Enqueue("I like swords");
-            RepeatingPrinter repeating = new RepeatingPrinter(queue);
+            DialogManager mgmr = new DialogManager();
+            IDialogPrinter underTest = mgmr.GetForScript(REPEATING_FILEPATH);
 
             int numLineOne = 0;
             int numbLineTwo = 0;
 
             for (int i = 0; i < 10; i++)
             {
-                string ret = repeating.GetDialogLine();
+                string ret = underTest.GetDialogLine();
                 Console.WriteLine(ret);
                 if (ret.Equals("Welcome to Corneria"))
                 {

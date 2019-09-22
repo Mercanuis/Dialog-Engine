@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Errors;
+using DialogEngine.Printers;
+using DialogEngine.Utilities;
 
 /// <summary>
 /// Manager class for the Dialog namespace. Most if not all calls should be made through this class
@@ -10,6 +10,9 @@ namespace DialogEngine
 {
     public class DialogManager
     {
+        private const string GENERAL = DialogConstants.GENERAL_PRINTER;
+        private const string REPEATING = DialogConstants.REPEATING_PRINTER;
+
         public DialogManager()
         {
 
@@ -20,14 +23,24 @@ namespace DialogEngine
         /// </summary>
         /// <param name="filePath">string filepath to a vaild file</param>
         /// <returns>DialogPrinter if the script is found and processed, null otherwise</returns>
-        public DialogPrinter GetForScript(string filePath)
+        public IDialogPrinter GetForScript(string filePath)
         {
-            DialogPrinter printer = null;
+            IDialogPrinter printer = null;
             try
             {
                 DialogGenerator gen = new DialogGenerator(filePath);
-                printer = new DialogPrinter(gen.GetLines());
-            } catch (ScriptNotFoundException e)
+
+                switch(gen.GetPrinterType())
+                {
+                    case GENERAL:
+                        printer = new DialogPrinter(gen.GetLines());
+                        break;
+                    case REPEATING:
+                        printer = new RepeatingPrinter(gen.GetLines());
+                        break;
+                }
+            }
+            catch (ScriptNotFoundException e)
             {
                 Console.Out.WriteLine(e.Message);
             }

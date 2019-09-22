@@ -1,0 +1,3 @@
+﻿DIALOG_TYPE=Repeating
+Welcome to Corneria
+I like swords
