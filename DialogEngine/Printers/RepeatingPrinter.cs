@@ -15,7 +15,7 @@ namespace DialogEngine.Printers
     /// </summary>
     public class RepeatingPrinter : IDialogPrinter
     {
-        List<string> dialogList;
+        private List<string> dialogList;
         private int currentLine = 0;
 
         public RepeatingPrinter(Queue<string> lines)
