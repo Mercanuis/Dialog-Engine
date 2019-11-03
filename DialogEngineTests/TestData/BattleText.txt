@@ -1,0 +1,4 @@
+﻿DIALOG_TYPE=Battle
+{0} takes {1} points of damage.
+{0} hits the {1} for {2} points of damage.
+{0} casts {1}! The {2} takes {3} points of damage.

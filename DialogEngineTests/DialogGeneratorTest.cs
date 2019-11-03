@@ -2,8 +2,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Errors;
 using System.IO;
 using System;
-using System.Collections.Generic;
 using DialogEngine.Printers;
+using DialogEngine.Printers.Custom;
+
 
 namespace DialogEngine
 {
@@ -13,6 +14,7 @@ namespace DialogEngine
         private readonly string FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "GeneralPrintFile.txt");
         private readonly string BAD_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "BAD.txt");
         private readonly string REPEATING_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "RepeatingPrintFile.txt");
+        private readonly string BATTLE_FILEPATH = Path.Combine(Environment.CurrentDirectory, @"TestData\", "BattleText.txt");
 
         [TestMethod]
         public void TestGenerator_BadFilePath()
@@ -73,6 +75,26 @@ namespace DialogEngine
             }
             Assert.AreEqual(5, numLineOne);
             Assert.AreEqual(5, numbLineTwo);
+        }
+
+        [TestMethod]
+        public void TestBattlePrinter()
+        {
+            DialogManager mgmr = new DialogManager();
+            IDialogPrinter underTest = mgmr.GetForScript(BATTLE_FILEPATH);
+
+            string[] dmgTakenParams = new string[] { "Terra", "25" };
+            Assert.AreEqual("Terra takes 25 points of damage.", string.Format(underTest.GetDialogLine(0), dmgTakenParams));
+
+            string[] dmgDealtParams = new string[] { "Setzer", "Goblin", "12" };
+            Assert.AreEqual("Setzer hits the Goblin for 12 points of damage.", string.Format(underTest.GetDialogLine(1), dmgDealtParams));
+
+            string[] magDealtParams = new string[] {"Celes", "Ice", "Magitec Armor MkII", "150" };
+            Assert.AreEqual("Celes casts Ice! The Magitec Armor MkII takes 150 points of damage.", string.Format(underTest.GetDialogLine(2), magDealtParams));
+
+            //Check to see if extra parameters are ignored, in case they're accidentially sent
+            string[] dmgTakenParams2 = new string[] { "Terra", "25", "35" };
+            Assert.AreEqual("Terra takes 25 points of damage.", string.Format(underTest.GetDialogLine(0), dmgTakenParams2));
         }
     }
 }

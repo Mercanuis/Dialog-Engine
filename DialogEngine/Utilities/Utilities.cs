@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DialogEngine.Utilities
+﻿namespace DialogEngine.Utilities
 {
     class Utilities
     {
@@ -13,6 +9,7 @@ namespace DialogEngine.Utilities
     {
         public const string GENERAL_PRINTER = "General";
         public const string REPEATING_PRINTER = "Repeating";
+        public const string BATTLE_PRINTER = "Battle";
 
         public static string GetPrinterType(string fileLine)
         {
@@ -24,6 +21,10 @@ namespace DialogEngine.Utilities
             else if (fileLine.Contains(REPEATING_PRINTER))
             {
                 return REPEATING_PRINTER;
+            }
+            else if (fileLine.Contains(BATTLE_PRINTER))
+            {
+                return BATTLE_PRINTER;
             }
 
             //for now, return general.

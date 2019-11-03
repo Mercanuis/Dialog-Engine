@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DialogEngine.Printers
 {
@@ -11,7 +12,7 @@ namespace DialogEngine.Printers
     /// </list>
     /// </para>
     /// </summary>
-    public class DialogPrinter : IDialogPrinter
+    class DialogPrinter : AbstractDialogPrinter
     {
         private const string END = "____END____";
 
@@ -22,7 +23,7 @@ namespace DialogEngine.Printers
             dialogLines = lines;
         }
 
-        public string GetDialogLine()
+        public override string GetDialogLine()
         {
             if (dialogLines.TryDequeue(out string line))
             {

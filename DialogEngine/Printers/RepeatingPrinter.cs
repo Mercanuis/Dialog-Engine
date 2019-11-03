@@ -13,9 +13,9 @@ namespace DialogEngine.Printers
     /// </list>
     /// </para>
     /// </summary>
-    public class RepeatingPrinter : IDialogPrinter
+    class RepeatingPrinter : AbstractDialogPrinter
     {
-        private List<string> dialogList;
+        private readonly List<string> dialogList;
         private int currentLine = 0;
 
         public RepeatingPrinter(Queue<string> lines)
@@ -28,15 +28,14 @@ namespace DialogEngine.Printers
             }
         }
 
-        public string GetDialogLine()
+        public override string GetDialogLine()
         {
-            string nextLine = "";
             if (currentLine >= dialogList.Count)
             {
                 currentLine = 0;
             }
 
-            nextLine = dialogList[currentLine];
+            string nextLine = dialogList[currentLine];
             currentLine++;
             return nextLine;
         }

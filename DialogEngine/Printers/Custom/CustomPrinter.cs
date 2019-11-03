@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DialogEngine.Printers
+namespace DialogEngine.Printers.Custom
 {
     /// <summary> Class CustomPrinter is for the printing of dialog that requires "Custom" parameters.
     /// <para>
@@ -11,25 +10,27 @@ namespace DialogEngine.Printers
     /// and then use specified dialog to format the parameters correctly. 
     /// </para>
     /// </summary>
-    class CustomPrinter : IDialogPrinter
+    class CustomPrinter : AbstractDialogPrinter
     {
-        private Dictionary<int, string> dialogMap;
+        private readonly Dictionary<int, string> dialogMap;
 
         public CustomPrinter(Queue<string> lines)
         {
+            dialogMap = new Dictionary<int, string>();
             int i = 0;
             foreach(string line in lines)
             {
                 dialogMap.Add(i, line);
+                i++;
             }
         }
 
-        public string GetDialogLine()
+        public override string GetDialogLine()
         {
-            return GetFromMap(0);
+            return dialogMap[0];
         }
 
-        public string GetFromMap(int index)
+        public override string GetDialogLine(int index)
         {
             return dialogMap[index];
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Errors;
 using DialogEngine.Printers;
+using DialogEngine.Printers.Custom;
 using DialogEngine.Utilities;
 
 /// <summary>
@@ -12,6 +13,7 @@ namespace DialogEngine
     {
         private const string GENERAL = DialogConstants.GENERAL_PRINTER;
         private const string REPEATING = DialogConstants.REPEATING_PRINTER;
+        private const string BATTLE = DialogConstants.BATTLE_PRINTER;
 
         public DialogManager()
         {
@@ -37,6 +39,9 @@ namespace DialogEngine
                         break;
                     case REPEATING:
                         printer = new RepeatingPrinter(gen.GetLines());
+                        break;
+                    case BATTLE:
+                        printer = new CustomPrinter(gen.GetLines());
                         break;
                 }
             }

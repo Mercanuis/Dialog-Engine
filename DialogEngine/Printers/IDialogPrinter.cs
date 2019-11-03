@@ -14,5 +14,7 @@ namespace DialogEngine.Printers
         /// </summary>
         /// <returns>The next line of dialog, in string format</returns>
         string GetDialogLine();
+
+        string GetDialogLine(int index);
     }
 }
