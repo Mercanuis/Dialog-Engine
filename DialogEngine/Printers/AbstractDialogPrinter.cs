@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DialogEngine.Printers
+﻿namespace DialogEngine.Printers
 {
-    internal abstract class AbstractDialogPrinter : IDialogPrinter
+    //TODO: Should this be public or internal
+    public abstract class AbstractDialogPrinter : IDialogPrinter
     {
         public virtual string GetDialogLine()
         {

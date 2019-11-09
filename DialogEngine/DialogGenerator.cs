@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using DialogEngine.Utilities;
 using Errors;
-using DialogEngine.Utilities;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 /// <summary>
 /// Namespace related to anything involving the generation, management, and production of 
@@ -41,10 +42,17 @@ namespace DialogEngine
             using (StreamReader sr = File.OpenText(scenePath))
             {
                 //Read the first line as its the type dileniator, then enqueue the rest of the lines
-                //TODO: Is this the best way to determine file type and to generalize the manager/printer interactions?
                 string line;
                 line = sr.ReadLine();
-                printerType = DialogConstants.GetPrinterType(line);
+                try
+                {
+                    printerType = DialogConstants.GetPrinterType(line);
+                }
+                catch(UtilErrors err)
+                {
+                    Console.WriteLine("Error Occurred during type retrival: " + err.Message);   
+                    printerType = DialogConstants.GENERAL_PRINTER;
+                }
 
                 while ((line = sr.ReadLine()) != null)
                 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DialogEngine.Printers.Custom
 {
@@ -10,7 +9,7 @@ namespace DialogEngine.Printers.Custom
     /// and then use specified dialog to format the parameters correctly. 
     /// </para>
     /// </summary>
-    class CustomPrinter : AbstractDialogPrinter
+    public class CustomPrinter : AbstractDialogPrinter
     {
         private readonly Dictionary<int, string> dialogMap;
 
@@ -18,7 +17,7 @@ namespace DialogEngine.Printers.Custom
         {
             dialogMap = new Dictionary<int, string>();
             int i = 0;
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
                 dialogMap.Add(i, line);
                 i++;

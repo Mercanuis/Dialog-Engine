@@ -1,8 +1,8 @@
-﻿using System;
-using Errors;
-using DialogEngine.Printers;
+﻿using DialogEngine.Printers;
 using DialogEngine.Printers.Custom;
 using DialogEngine.Utilities;
+using Errors;
+using System;
 
 /// <summary>
 /// Manager class for the Dialog namespace. Most if not all calls should be made through this class
@@ -32,7 +32,7 @@ namespace DialogEngine
             {
                 DialogGenerator gen = new DialogGenerator(filePath);
 
-                switch(gen.GetPrinterType())
+                switch (gen.GetPrinterType())
                 {
                     case GENERAL:
                         printer = new DialogPrinter(gen.GetLines());
@@ -41,7 +41,7 @@ namespace DialogEngine
                         printer = new RepeatingPrinter(gen.GetLines());
                         break;
                     case BATTLE:
-                        printer = new CustomPrinter(gen.GetLines());
+                        printer = new BattlePrinter(gen.GetLines());
                         break;
                 }
             }

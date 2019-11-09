@@ -2,11 +2,11 @@
 
 namespace DialogEngine.Printers.Custom
 {
-    class BattlePrinter : CustomPrinter
+    public class BattlePrinter : CustomPrinter
     {
-        const int DAMAGE_TAKEN_TEXT = 1;
-        const int DAMAGE_DEALT_TEXT = 2;
-        const int DAMAGE_DEALT_MAGIC_TEXT = 3;
+        const int DAMAGE_TAKEN_TEXT = 0;
+        const int DAMAGE_DEALT_TEXT = 1;
+        const int DAMAGE_DEALT_MAGIC_TEXT = 2;
 
         public BattlePrinter(Queue<string> lines) : base(lines)
         {
@@ -14,7 +14,6 @@ namespace DialogEngine.Printers.Custom
 
         public string GetDamageTaken(string[] parameters)
         {
-            //string formatStr = GetDialogLine(DAMAGE_TAKEN_TEXT);
             return GetDialog(GetDialogLine(DAMAGE_TAKEN_TEXT), parameters);
         }
 

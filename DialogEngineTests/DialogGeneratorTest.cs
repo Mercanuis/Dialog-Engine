@@ -1,9 +1,9 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Errors;
-using System.IO;
-using System;
 using DialogEngine.Printers;
 using DialogEngine.Printers.Custom;
+using Errors;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
 
 
 namespace DialogEngine
@@ -35,7 +35,7 @@ namespace DialogEngine
         {
             DialogManager mgmr = new DialogManager();
             IDialogPrinter underTest = mgmr.GetForScript(FILEPATH);
-           
+
             string expectedActor = "Arin : What do you say, suck my dick?";
             Assert.AreEqual(expectedActor, underTest.GetDialogLine());
         }
@@ -81,20 +81,20 @@ namespace DialogEngine
         public void TestBattlePrinter()
         {
             DialogManager mgmr = new DialogManager();
-            IDialogPrinter underTest = mgmr.GetForScript(BATTLE_FILEPATH);
+            BattlePrinter underTest = (BattlePrinter)mgmr.GetForScript(BATTLE_FILEPATH);
 
             string[] dmgTakenParams = new string[] { "Terra", "25" };
-            Assert.AreEqual("Terra takes 25 points of damage.", string.Format(underTest.GetDialogLine(0), dmgTakenParams));
+            Assert.AreEqual("Terra takes 25 points of damage.", underTest.GetDamageTaken(dmgTakenParams));
 
             string[] dmgDealtParams = new string[] { "Setzer", "Goblin", "12" };
-            Assert.AreEqual("Setzer hits the Goblin for 12 points of damage.", string.Format(underTest.GetDialogLine(1), dmgDealtParams));
+            Assert.AreEqual("Setzer hits the Goblin for 12 points of damage.", underTest.GetDamageDealt(dmgDealtParams));
 
-            string[] magDealtParams = new string[] {"Celes", "Ice", "Magitec Armor MkII", "150" };
-            Assert.AreEqual("Celes casts Ice! The Magitec Armor MkII takes 150 points of damage.", string.Format(underTest.GetDialogLine(2), magDealtParams));
+            string[] magDealtParams = new string[] { "Celes", "Ice", "Magitec Armor MkII", "150" };
+            Assert.AreEqual("Celes casts Ice! The Magitec Armor MkII takes 150 points of damage.", underTest.GetMagicDamageDealt(magDealtParams));
 
             //Check to see if extra parameters are ignored, in case they're accidentially sent
             string[] dmgTakenParams2 = new string[] { "Terra", "25", "35" };
-            Assert.AreEqual("Terra takes 25 points of damage.", string.Format(underTest.GetDialogLine(0), dmgTakenParams2));
+            Assert.AreEqual("Terra takes 25 points of damage.", underTest.GetDamageTaken(dmgTakenParams2));
         }
     }
 }

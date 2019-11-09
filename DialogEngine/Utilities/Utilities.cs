@@ -1,4 +1,5 @@
-﻿namespace DialogEngine.Utilities
+﻿using Errors;
+namespace DialogEngine.Utilities
 {
     class Utilities
     {
@@ -14,7 +15,7 @@
         public static string GetPrinterType(string fileLine)
         {
             //Determine the type from the pattern [DIALOG_TYPE=]?[a-zA-Z]+
-            if(fileLine.Contains(GENERAL_PRINTER))
+            if (fileLine.Contains(GENERAL_PRINTER))
             {
                 return GENERAL_PRINTER;
             }
@@ -27,9 +28,7 @@
                 return BATTLE_PRINTER;
             }
 
-            //for now, return general.
-            //TODO: error handling? determine if necessary
-            return GENERAL_PRINTER;
+            throw new UtilErrors("File type was not found");
         }
     }
 }
