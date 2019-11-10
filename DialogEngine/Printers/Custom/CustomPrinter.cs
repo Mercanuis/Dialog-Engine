@@ -9,7 +9,7 @@ namespace DialogEngine.Printers.Custom
     /// and then use specified dialog to format the parameters correctly. 
     /// </para>
     /// </summary>
-    public class CustomPrinter : AbstractDialogPrinter
+    class CustomPrinter : AbstractDialogPrinter
     {
         private readonly Dictionary<int, string> dialogMap;
 

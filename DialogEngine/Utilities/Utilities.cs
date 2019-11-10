@@ -6,7 +6,7 @@ namespace DialogEngine.Utilities
 
     }
 
-    class DialogConstants
+    public class DialogConstants
     {
         public const string GENERAL_PRINTER = "General";
         public const string REPEATING_PRINTER = "Repeating";
@@ -28,7 +28,7 @@ namespace DialogEngine.Utilities
                 return BATTLE_PRINTER;
             }
 
-            throw new UtilErrors("File type was not found");
+            throw new UtilityException("File type was not found");
         }
     }
 }

@@ -48,9 +48,9 @@ namespace DialogEngine
                 {
                     printerType = DialogConstants.GetPrinterType(line);
                 }
-                catch(UtilErrors err)
+                catch (UtilityException err)
                 {
-                    Console.WriteLine("Error Occurred during type retrival: " + err.Message);   
+                    Console.WriteLine("Error Occurred during type retrival: " + err.Message);
                     printerType = DialogConstants.GENERAL_PRINTER;
                 }
 

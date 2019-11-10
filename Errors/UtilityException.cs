@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Errors
 {
-    public class UtilErrors : Exception
+    public class UtilityException : Exception
     {
         private const string ERROR_MSG = "UtilityException";
 
         /// <summary>
         /// Generic Constructor for UtilError
         /// </summary>
-        public UtilErrors()
+        public UtilityException()
         {
         }
 
-        public UtilErrors(string message)
+        public UtilityException(string message)
             : base(String.Format("{0}: {1}", ERROR_MSG, message))
-        { 
+        {
         }
     }
 }

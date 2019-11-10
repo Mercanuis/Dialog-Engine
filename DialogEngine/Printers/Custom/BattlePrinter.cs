@@ -2,7 +2,8 @@
 
 namespace DialogEngine.Printers.Custom
 {
-    public class BattlePrinter : CustomPrinter
+    //TODO: need to determine how to best use this. Right now this is only an extension of the CustomPrinter. Does this need to be moved to the BattleEngine?
+    class BattlePrinter : CustomPrinter
     {
         const int DAMAGE_TAKEN_TEXT = 0;
         const int DAMAGE_DEALT_TEXT = 1;

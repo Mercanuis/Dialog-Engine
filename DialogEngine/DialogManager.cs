@@ -41,7 +41,7 @@ namespace DialogEngine
                         printer = new RepeatingPrinter(gen.GetLines());
                         break;
                     case BATTLE:
-                        printer = new BattlePrinter(gen.GetLines());
+                        printer = new CustomPrinter(gen.GetLines());
                         break;
                 }
             }

@@ -1,0 +1,2 @@
+﻿DIALOG_TYPE=Invalid
+This should be findable, but exception was thrown
